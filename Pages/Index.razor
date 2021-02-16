@@ -25,7 +25,7 @@
         }
         <button class="flex-none px-2 py-1 bg-red-500 rounded" @onclick="ResetTimer"><i class="fas fa-stop"></i></button>
         <button class="flex-none px-2 py-1 bg-blue-500 rounded" @onclick=@(()=>SwitchToMode(TimerMode.Work))><i class="fas fa-pencil-alt"></i></button>
-        <button class="flex-none px-2 py-1 bg-yellow-500 rounded" @onclick=@(()=>SwitchToMode(TimerMode.Pause))><i class="fas fa-mug-hot"></i></button>
+        <button class="flex-none px-2 py-1 bg-yellow-500 rounded" @onclick=@(()=>SwitchToMode(TimerMode.Break))><i class="fas fa-mug-hot"></i></button>
 
         <div class="flex-1"></div>
     </div>
@@ -83,7 +83,7 @@
                 timeleft = TimeSpan.FromMinutes(25);
                 break;
 
-            case TimerMode.Pause:
+            case TimerMode.Break:
                 timeleft = TimeSpan.FromMinutes(10);
                 break;
         }
@@ -98,6 +98,6 @@
     enum TimerMode
     {
         Work,
-        Pause
+        Break
     }
 }
