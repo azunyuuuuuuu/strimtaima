@@ -117,7 +117,7 @@
       "url": "_framework\/System.IO.Pipelines.dll"
     },
     {
-      "hash": "sha256-KxqHZQFyq+xellzSv+GxBlFjlgmiChxJ4zkoYeuxT1o=",
+      "hash": "sha256-o+esRDSz+OKOEdW0snPd93tNX1xt\/zH3pVkR8VY\/ZLQ=",
       "url": "_framework\/strimtaima.dll"
     },
     {
@@ -193,7 +193,7 @@
       "url": "_framework\/System.Private.CoreLib.dll"
     },
     {
-      "hash": "sha256-jn76Gxkk7gFxHZ1YRLsbBgUU9dQDYfhqqv6kFh1YRnM=",
+      "hash": "sha256-1oj1GKAh7pK7D96bKevBoKsMcfKBLGlHU1cX7UydtnM=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -201,5 +201,5 @@
       "url": "_framework\/blazor.webassembly.js"
     }
   ],
-  "version": "6nUwRWrG"
+  "version": "r4KrHM9r"
 };
