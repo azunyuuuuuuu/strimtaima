@@ -23,13 +23,32 @@
         {
             <button class="flex-none px-2 py-1 bg-green-500 rounded" @onclick="PauseTimer"><i class="fas fa-pause"></i></button>
         }
+
         <button class="flex-none px-2 py-1 bg-red-500 rounded" @onclick="ResetTimer"><i class="fas fa-stop"></i></button>
         <button class="flex-none px-2 py-1 bg-blue-500 rounded" @onclick=@(()=>SwitchToMode(TimerMode.Work))><i class="fas fa-pencil-alt"></i></button>
         <button class="flex-none px-2 py-1 bg-yellow-500 rounded" @onclick=@(()=>SwitchToMode(TimerMode.Break))><i class="fas fa-mug-hot"></i></button>
 
+        @if (audioenabled)
+        {
+            <button class="flex-none px-2 py-1 bg-purple-500 rounded" @onclick="ToggleAudio"><i class="fas fa-volume-up"></i></button>
+        }
+        else
+        {
+            <button class="flex-none px-2 py-1 bg-purple-500 rounded" @onclick="ToggleAudio"><i class="fas fa-volume-mute"></i></button>
+        }
+
         <div class="flex-1"></div>
     </div>
 </div>
+
+@if (audioenabled && playaudio > 0)
+{
+    <audio class="hidden" autoplay controls><source src="notification.mp3"/></audio>
+}
+else
+{
+    <audio class="hidden" muted controls><source src="notification.mp3"/></audio>
+}
 
 @code
 {
@@ -39,6 +58,8 @@
 
     private bool active = true;
     private bool enabled = false;
+    private bool audioenabled = true;
+    private int playaudio = 0;
 
     protected override async Task OnInitializedAsync()
     {
@@ -50,13 +71,19 @@
     {
         while (active)
         {
-            await Task.Delay(1000);
+            await Task.Delay(TimeSpan.FromSeconds(1));
 
             if (enabled)
                 timeleft -= TimeSpan.FromSeconds(1);
 
             if (enabled && timeleft <= TimeSpan.Zero)
+                playaudio = 3;
+            
+            if (enabled && timeleft <= TimeSpan.Zero)
                 enabled = false;
+
+            if (playaudio > 0)
+                playaudio--;
 
             displaytext = $"{timeleft.ToString(@"mm\:ss")} {_timermode}";
 
@@ -77,6 +104,7 @@
     private void ResetTimer()
     {
         enabled = false;
+
         switch (_timermode)
         {
             case TimerMode.Work:
@@ -87,6 +115,11 @@
                 timeleft = TimeSpan.FromMinutes(10);
                 break;
         }
+    }
+
+    private void ToggleAudio()
+    {
+        audioenabled = !audioenabled;
     }
 
     private void SwitchToMode(TimerMode mode)
