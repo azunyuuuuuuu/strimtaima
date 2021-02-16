@@ -2,9 +2,9 @@
 @using System.Timers
 
 
-<div class="grid grid-cols-1 grid-rows-2 p-8">
+<div class="flex flex-col group">
 
-    <div class="flex">
+    <div class="flex m-6">
         <div class="flex-1"></div>
         <h1 class="flex-none text-8xl displaytext">
             @displaytext
@@ -12,19 +12,21 @@
         <div class="flex-1"></div>
     </div>
 
-    <div class="flex opacity-0 hover:opacity-10">
+    <div class="flex m-2 space-x-2 opacity-0 group-hover:opacity-20 text-white">
         <div class="flex-1"></div>
+
         @if (!enabled)
         {
-            <button class="flex-none" @onclick="StartTimer">⏯</button>
+            <button class="flex-none px-2 py-1 bg-green-500 rounded" @onclick="StartTimer"><i class="fas fa-play"></i></button>
         }
         else
         {
-            <button class="flex-none" @onclick="PauseTimer">⏸</button>
+            <button class="flex-none px-2 py-1 bg-green-500 rounded" @onclick="PauseTimer"><i class="fas fa-pause"></i></button>
         }
-        <button class="flex-none" @onclick="ResetTimer">⏹</button>
-        <button class="flex-none" @onclick=@(()=>SwitchToMode(TimerMode.Work))>📝</button>
-        <button class="flex-none" @onclick=@(()=>SwitchToMode(TimerMode.Pause))>☕</button>
+        <button class="flex-none px-2 py-1 bg-red-500 rounded" @onclick="ResetTimer"><i class="fas fa-stop"></i></button>
+        <button class="flex-none px-2 py-1 bg-blue-500 rounded" @onclick=@(()=>SwitchToMode(TimerMode.Work))><i class="fas fa-pencil-alt"></i></button>
+        <button class="flex-none px-2 py-1 bg-yellow-500 rounded" @onclick=@(()=>SwitchToMode(TimerMode.Pause))><i class="fas fa-mug-hot"></i></button>
+
         <div class="flex-1"></div>
     </div>
 </div>
@@ -32,7 +34,7 @@
 @code
 {
     TimeSpan timeleft = TimeSpan.FromSeconds(25);
-    string displaytext = string.Empty;
+    string displaytext = "henlo :3";
     TimerMode _timermode = TimerMode.Work;
 
     private bool active = true;
