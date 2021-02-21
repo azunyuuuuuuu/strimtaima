@@ -73,6 +73,8 @@ else
     private bool audioenabled = true;
     private int playaudio = 0;
 
+    private static TimeSpan loopinterval = TimeSpan.FromSeconds(0.20);
+
     [Parameter]
     public int WorkMinutes { get; set; }
     [Parameter]
@@ -100,10 +102,10 @@ else
         
         while (active)
         {
-            await Task.Delay(TimeSpan.FromSeconds(1));
+            await Task.Delay(loopinterval);
 
             if (enabled)
-                timeleft -= TimeSpan.FromSeconds(1);
+                timeleft -= loopinterval;
 
             if (enabled && timeleft <= TimeSpan.Zero)
                 playaudio = 3;
